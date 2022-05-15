@@ -1,0 +1,10 @@
+<div
+  [class.horizontal]="isPcSmall || isWideScreen"
+  [class.vertical]="isMobile || isTablet"
+>
+  <div *ngFor="let group of groups; index as index">
+    <h4>{{ group.name }}</h4>
+    <p>{{ group.description }}</p>
+    <p>{{ group.tags.join(', ') }}</p>
+  </div>
+</div>
