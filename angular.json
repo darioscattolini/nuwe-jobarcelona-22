@@ -70,7 +70,10 @@
               "projects/demo-app/src/styles.scss",
               "dist/jobx-ui/assets/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/uikit/dist/js/uikit-core.min.js",
+              "node_modules/uikit/dist/js/components/slider.min.js"
+            ]
           },
           "configurations": {
             "production": {
