@@ -5,11 +5,15 @@ import {
   RESPONSIVE_CONFIG_DEFAULT
 } from './config/responsive.config';
 import { 
+  GiftsGroupCardComponent
+} from './gifts-group-card/gifts-group-card.component';
+import { 
   GiftsGroupListComponent
 } from './gifts-group-list/gifts-group-list.component';
 
 @NgModule({
   declarations: [
+    GiftsGroupCardComponent,
     GiftsGroupListComponent
   ],
   providers: [

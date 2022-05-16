@@ -1,18 +1,18 @@
 <div *ngIf="isPcSmall || isWideScreen; then horizontalScroll else list"></div>
 
 <ng-template #horizontalScroll>
-  <div uk-slider class="uk-slider-container-offset">
+  <div uk-slider="center: true"
+    class="uk-slider-container-offset uk-visible-toggle"
+  >
     <div class="uk-position-relative">
       <div class="uk-slider-container">
-        <ul class="uk-slider-items uk-grid uk-padding">
+        <ul class="uk-slider-items uk-grid uk-padding" uk-height-match>
           <li *ngFor="let group of groups; index as index">
-            <div class="uk-card uk-card-default">
-              <div class="uk-card-body">
-                <h4 class="uk-card-title">{{ group.name }}</h4>
-                <p>{{ group.description }}</p>
-                <p>{{ group.tags.join(', ') }}</p>
-              </div>
-            </div>
+            <jxui-gifts-group-card
+              [name]="group.name"
+              [description]="group.description"
+              [tags]="group.tags"
+            ></jxui-gifts-group-card>
           </li>
         </ul>
       </div>

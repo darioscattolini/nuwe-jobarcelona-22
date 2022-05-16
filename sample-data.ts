@@ -7,7 +7,7 @@ export const groups = [
   }, {
     id: 2,
     name: 'Family',
-    description: 'Lista de regalos para el grupo family',
+    description: 'Lista de regalos para el grupo family. Vamos a probar qué ocurre si hacemos esta línea más larga.',
     tags: ['Familia', 'Deportes']
   }, {
     id: 3,
