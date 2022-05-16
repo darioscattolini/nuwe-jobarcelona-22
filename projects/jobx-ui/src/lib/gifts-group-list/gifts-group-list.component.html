@@ -1,3 +1,5 @@
+<h2 class="uk-text-center@s uk-heading-line"><span>Grupos de regalos</span></h2>
+
 <div *ngIf="isPcSmall || isWideScreen; then horizontalScroll else list"></div>
 
 <ng-template #horizontalScroll>
@@ -14,7 +16,7 @@
 </ng-template>
 
 <ng-template #list>
-  <ul class="uk-list uk-list-striped uk-list-large">
+  <ul class="uk-list uk-list-striped" [class.uk-list-large]="isTablet">
     <li *ngFor="let group of groups" class="uk-text-center">
       <button class="uk-button uk-button-text" (click)="select(group)">
         {{ group.name }}
