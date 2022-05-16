@@ -1,13 +1,11 @@
 <div *ngIf="isPcSmall || isWideScreen; then horizontalScroll else list"></div>
 
 <ng-template #horizontalScroll>
-  <div uk-slider="center: true"
-    class="uk-slider-container-offset uk-visible-toggle"
-  >
+  <div uk-slider="center: true" class="uk-visible-toggle" tabindex="0">
     <div class="uk-position-relative">
       <div class="uk-slider-container">
-        <ul class="uk-slider-items uk-grid uk-padding" uk-height-match>
-          <li *ngFor="let group of groups; index as index">
+        <ul class="uk-slider-items uk-grid uk-grid-large uk-padding" uk-height-match>
+          <li *ngFor="let group of groups; index as index" tabindex="0">
             <jxui-gifts-group-card
               [name]="group.name"
               [description]="group.description"
