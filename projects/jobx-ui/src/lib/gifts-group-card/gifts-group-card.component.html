@@ -1,5 +1,5 @@
-<div class="uk-card uk-card-default uk-card-hover 
-  gifts-group-card uk-flex uk-flex-column uk-flex-between">
+<div  class="uk-card uk-card-default uk-card-hover 
+    gifts-group-card uk-flex uk-flex-column uk-flex-between">
   <div class="uk-card-body">
     <h4 class="uk-card-title">{{ name }}</h4>
     <p>{{ description }}</p>
@@ -11,7 +11,9 @@
   </div>
 
   <div class="uk-card-footer">
-    <button class="uk-button uk-button-text uk-button-small uk-float-right">
+    <button 
+      class="uk-button uk-button-text uk-button-small uk-float-right"
+      (click)="select()">
       Ver más
     </button>
   </div>

@@ -2,12 +2,13 @@
 
 <ng-template #horizontalScroll>
   <jxui-slider>
-    <li *ngFor="let group of groups" (click)="select($event, group)">
-      <jxui-gifts-group-card
+    <li *ngFor="let group of groups">
+      <jxui-gifts-group-card (selected)="select(group)"
+        [id]="group.id"
         [name]="group.name"
         [description]="group.description"
-        [tags]="group.tags"
-      ></jxui-gifts-group-card>
+        [tags]="group.tags">
+      </jxui-gifts-group-card>
     </li>
   </jxui-slider>
 </ng-template>
@@ -15,7 +16,7 @@
 <ng-template #list>
   <ul class="uk-list uk-list-striped uk-list-large">
     <li *ngFor="let group of groups" class="uk-text-center">
-      <button class="uk-button uk-button-text" (click)="select($event, group)">
+      <button class="uk-button uk-button-text" (click)="select(group)">
         {{ group.name }}
       </button>
     </li>
