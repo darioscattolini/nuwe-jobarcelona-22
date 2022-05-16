@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { JobxUiModule } from '../../../jobx-ui/src/public-api';
+import { JobxUiModule } from 'dist/jobx-ui';
 import { AppComponent } from './app.component';
 
 @NgModule({
