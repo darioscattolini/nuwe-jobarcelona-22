@@ -1,41 +1,15 @@
 <div *ngIf="isPcSmall || isWideScreen; then horizontalScroll else list"></div>
 
 <ng-template #horizontalScroll>
-  <div uk-slider="center: true" class="uk-visible-toggle">
-    <div class="uk-position-relative">
-      <div class="uk-slider-container">
-        <ul class="uk-slider-items uk-grid uk-grid-large uk-padding" uk-height-match>
-          <li *ngFor="let group of groups">
-            <jxui-gifts-group-card
-              [name]="group.name"
-              [description]="group.description"
-              [tags]="group.tags"
-            ></jxui-gifts-group-card>
-          </li>
-        </ul>
-      </div>
-
-      <div class="uk-hidden@s uk-light">
-        <a class="uk-position-center-left uk-position-small" href="#"
-          uk-slidenav-previous uk-slider-item="previous"
-        ></a>
-        <a class="uk-position-center-right uk-position-small" href="#"
-          uk-slidenav-next uk-slider-item="next"
-        ></a>
-      </div>
-
-      <div class="uk-visible@s">
-        <a class="uk-position-center-left-out uk-position-small"
-          href="#" uk-slidenav-previous uk-slider-item="previous"
-        ></a>
-        <a class="uk-position-center-right-out uk-position-small" href="#"
-          uk-slidenav-next uk-slider-item="next"
-        ></a>
-      </div>
-    </div>
-
-    <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-  </div>
+  <jxui-slider>
+    <li *ngFor="let group of groups" (click)="select($event, group)">
+      <jxui-gifts-group-card
+        [name]="group.name"
+        [description]="group.description"
+        [tags]="group.tags"
+      ></jxui-gifts-group-card>
+    </li>
+  </jxui-slider>
 </ng-template>
 
 <ng-template #list>

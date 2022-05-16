@@ -9,9 +9,4 @@ export class GiftsGroupCardComponent {
   @Input() name!: string;
   @Input() description!: string;
   @Input() tags!: string[];
-
-  public select($event: MouseEvent) {
-    $event.stopPropagation();
-    console.log('Selected group: ' + this.name);
-  }
 }

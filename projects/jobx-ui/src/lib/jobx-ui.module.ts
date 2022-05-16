@@ -10,11 +10,13 @@ import {
 import { 
   GiftsGroupListComponent
 } from './gifts-group-list/gifts-group-list.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
     GiftsGroupCardComponent,
-    GiftsGroupListComponent
+    GiftsGroupListComponent,
+    SliderComponent
   ],
   providers: [
     { provide: RESPONSIVE_CONFIG, useValue: RESPONSIVE_CONFIG_DEFAULT }

@@ -15,6 +15,6 @@ export class GiftsGroupListComponent extends ResponsiveComponent {
   }[];
   
   public select($event: MouseEvent, group: this['groups'][number]): void {
-    console.log('Selected group: ' + group.name);
+    alert('Selected group: ' + group.name);
   }
 }
