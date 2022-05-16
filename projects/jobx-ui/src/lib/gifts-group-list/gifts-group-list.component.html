@@ -16,7 +16,13 @@
 </ng-template>
 
 <ng-template #list>
-  <ul class="uk-list uk-list-striped" [class.uk-list-large]="isTablet">
+  <ul 
+    class="uk-list uk-list-striped uk-overflow-auto"
+    [ngClass]="{
+      'uk-list-large uk-height-max-large scrollbar-wide': isTablet,
+      'uk-height-max-medium': isMobile
+    }"
+  >
     <li *ngFor="let group of groups" class="uk-text-center">
       <button class="uk-button uk-button-text" (click)="select(group)">
         {{ group.name }}

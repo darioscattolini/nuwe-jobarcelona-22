@@ -1,0 +1,31 @@
+ul {
+  --scrollbarBG: #e5e5e5;
+  --thumbBG: #bbbbbb;
+}
+
+ul::-webkit-scrollbar {
+  width: 11px;
+}
+
+ul.scrollbar-wide::-webkit-scrollbar {
+  width: 16px;
+}
+
+ul {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+ul.scrollbar-wide {
+  scrollbar-width: auto;
+}
+
+ul::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
