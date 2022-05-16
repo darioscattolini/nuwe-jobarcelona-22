@@ -1,7 +1,22 @@
-<div class="uk-card uk-card-default gifts-group-card">
+<div class="uk-card uk-card-default uk-card-hover 
+  gifts-group-card uk-flex uk-flex-column uk-flex-between"
+  (click)="select($event)"
+>
   <div class="uk-card-body">
     <h4 class="uk-card-title">{{ name }}</h4>
     <p>{{ description }}</p>
-    <p>{{ tags.join(', ') }}</p>
+    <div>
+      <span *ngFor="let tag of tags" class="uk-badge uk-margin-small-right">
+        {{ tag }}
+      </span>
+    </div>
+  </div>
+
+  <div class="uk-card-footer">
+    <button class="uk-button uk-button-text uk-button-small uk-float-right"
+      (click)="select($event)"
+    >
+      Ver más
+    </button>
   </div>
 </div>

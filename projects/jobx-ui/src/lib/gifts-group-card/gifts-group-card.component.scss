@@ -1,4 +1,3 @@
-
 .gifts-group-card {
   width: 400px;
   height: 100%;
@@ -6,4 +5,8 @@
 
 .gifts-group-card:hover {
   cursor: pointer;
+}
+
+.gifts-group-card:hover .uk-button-text::before {
+  right: 0;
 }
