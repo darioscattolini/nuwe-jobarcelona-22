@@ -7,7 +7,6 @@ import { ResponsiveComponent } from '../responsive/responsive.component';
   styleUrls: ['./gifts-group-list.component.scss']
 })
 export class GiftsGroupListComponent extends ResponsiveComponent {
-  //@Input() clickHandler!: (groupId: number) => void;
   @Input() groups!: {
     id: number;
     name: string;
@@ -15,7 +14,7 @@ export class GiftsGroupListComponent extends ResponsiveComponent {
     tags: string[];
   }[];
   
-  /*public handleClick($event: MouseEvent, groupId: number): void {
-    this.clickHandler(groupId);
-  }*/
+  public select($event: MouseEvent, group: this['groups'][number]): void {
+    console.log('Selected group: ' + group.name);
+  }
 }
