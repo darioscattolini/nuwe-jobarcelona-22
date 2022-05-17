@@ -4,6 +4,7 @@ import {
   RESPONSIVE_CONFIG,
   RESPONSIVE_CONFIG_DEFAULT
 } from './config/responsive.config';
+import { ScreenService } from './responsive/screen.service';
 import { 
   GiftsGroupCardComponent
 } from './gifts-group-card/gifts-group-card.component';
@@ -19,7 +20,8 @@ import { SliderComponent } from './slider/slider.component';
     SliderComponent
   ],
   providers: [
-    { provide: RESPONSIVE_CONFIG, useValue: RESPONSIVE_CONFIG_DEFAULT }
+    { provide: RESPONSIVE_CONFIG, useValue: RESPONSIVE_CONFIG_DEFAULT },
+    ScreenService
   ],
   imports: [
     CommonModule

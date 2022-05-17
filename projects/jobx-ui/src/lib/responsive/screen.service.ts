@@ -1,16 +1,14 @@
-import { Directive, HostListener, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { 
-  ResponsiveConfig,
-  RESPONSIVE_CONFIG
+  ResponsiveConfig, RESPONSIVE_CONFIG 
 } from '../config/responsive.config';
 
 /**
- * Abstract class that can be extended by all responsive components. This 
- * pattern is broken in Storybook, so this class had to be refactored into 
- * an injectable dependency (ScreenService). 
+ * Service that tracks viewport width for responsive components. Designed
+ * originally as an abstract component, but that pattern is broken in Storybook.
  */
-@Directive()
-export abstract class ResponsiveComponent {
+@Injectable({ providedIn: 'root' })
+export class ScreenService {
   public get isMobile() {
     return this.screenWidth < this.tabletMin;
   }
@@ -41,10 +39,6 @@ export abstract class ResponsiveComponent {
     this.tabletMin = config.tabletMin;
     this.pcSmallMin = config.pcMin;
     this.wideScreenMin = config.wideScreenMin;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  public onResize() {
-    this.screenWidth = window.innerWidth;
+    window.onresize = () => { this.screenWidth = window.innerWidth };
   }
 }

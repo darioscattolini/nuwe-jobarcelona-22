@@ -1,6 +1,8 @@
 <h2 class="uk-text-center@s uk-heading-line"><span>Grupos de regalos</span></h2>
 
-<div *ngIf="isPcSmall || isWideScreen; then horizontalScroll else list"></div>
+<div 
+  *ngIf="screen.isMobile || screen.isTablet; then list else horizontalScroll">
+</div>
 
 <ng-template #horizontalScroll>
   <jxui-slider>
@@ -19,8 +21,8 @@
   <ul 
     class="uk-list uk-list-striped uk-overflow-auto"
     [ngClass]="{
-      'uk-list-large uk-height-max-large scrollbar-wide': isTablet,
-      'uk-height-max-medium': isMobile
+      'uk-list-large uk-height-max-large scrollbar-wide': screen.isTablet,
+      'uk-height-max-medium': screen.isMobile
     }"
   >
     <li *ngFor="let group of groups" class="uk-text-center">
