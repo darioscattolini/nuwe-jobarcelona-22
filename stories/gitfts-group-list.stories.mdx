@@ -1,0 +1,132 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import { moduleMetadata } from '@storybook/angular';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { JobxUiModule, GiftsGroupListComponent, ScreenService } from 'jobx-ui';
+import { groups } from '../sample-data';
+
+<Meta 
+  title="Gifts Group List"
+  component={ GiftsGroupListComponent }
+  decorators={[
+    moduleMetadata({
+      imports: [
+        JobxUiModule
+      ]
+    })
+  ]}
+  args = {{ groups }}
+  argTypes = {{
+    groups: {
+      description: 'Array of groups to be displayed by component',
+      type: { required: true }
+    },
+    select: {
+      description: 'Method called when user clicks on group action button',
+    }
+  }}
+/>
+
+export const Template = (args) => ({ props: args });
+
+export const viewport = {
+  viewports: {
+    ...INITIAL_VIEWPORTS,
+    laptop: {
+      name: 'laptop',
+      styles: {
+        width: '1440px',
+        height: '900px',
+      },
+    },
+  } 
+};
+
+# Gifts Group List
+
+The `GiftsGroupListComponent` displays a list of gift groups.
+
+When the user clicks on a group's action button, an indeterminate handler is
+called (for the sake of demonstration an alert is displayed).
+
+<ArgsTable story="View for Mobile" />
+
+## `GiftsGroup`
+
+The component must be provided an array of gift groups through the `@Input()`
+property `groups`. This groups must satisfy `GiftsGroup` interface: 
+
+```ts
+{
+  id: number;
+  name: string;
+  description: string;
+  tags: string[];
+}
+```
+
+## Responsiveness
+
+The component comprises two main alternative views:
+
+* A horizontal scroll, displaying groups in a slider of cards rich in content,
+  for wider screens (large / horizontal tablets and above).
+* A vertical scroll, displaying a list of group names, for narrow screens
+  (mobile and regular).
+
+Breakpoints are not handled within the component. For the sake of library
+consistency, they are configured through a special `RESPONSIVE_CONFIG` provider
+for the whole library. This provider can be overriden at the `providers` array
+of the library's `JobxUiModule`.
+
+Unfortunately, Storybook does not apply viewport parameters within this **Docs**
+page. Therefore the views at the end of this page do not represent how different
+stories really look like. Real views can be checked at the **Canvas** tab for
+each story:
+
+* [View for Mobile](?path=/story/gifts-group-list--view-for-mobile)
+* [View for Tablet](?path=/story/gifts-group-list--view-for-tablet)
+* [View for Large / Landscape Tablet](?path=/story/gifts-group-list--view-for-large-landscape-tablet)
+* [View for Laptop](?path=/story/gifts-group-list--view-for-laptop)
+
+<Canvas>
+  <Story 
+    name="View for Mobile"
+    parameters={{ 
+      viewport: {
+        ...viewport, 
+        defaultViewport: 'iphone12'
+      }
+    }}>
+    {Template.bind({})}
+  </Story>
+  <Story 
+    name="View for Tablet"
+    parameters={{ 
+      viewport: {
+        ...viewport, 
+        defaultViewport: 'ipad'
+      }
+    }}>
+    {Template.bind({})}
+  </Story>
+  <Story 
+    name="View for Large / Landscape Tablet"
+    parameters={{ 
+      viewport: {
+        ...viewport, 
+        defaultViewport: 'ipad12p'
+      }
+    }}>
+    {Template.bind({})}
+  </Story>
+  <Story 
+    name="View for Laptop"
+    parameters={{ 
+      viewport: {
+        ...viewport, 
+        defaultViewport: 'laptop'
+      }
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

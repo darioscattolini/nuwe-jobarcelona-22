@@ -53,15 +53,15 @@
         },
         {
             "name": "ResponsiveConfig",
-            "id": "interface-ResponsiveConfig-2c30d501a5317b10f1ad11e4901d875c07be0e97ba50265800eb398fe48f15e5d266581569779e6052e1259602595fea6fcbdbb5a0844830cb838d59eba0c2ed",
+            "id": "interface-ResponsiveConfig-79836655be07eb6cacc01e57b5e810e9a9edbe08193b991428e2c5e4495282471e0ca9a6c3c3efff4dc51b48a50ebe29a60f08adc5f80ebc5bf6fb4818f9ad90",
             "file": "projects/jobx-ui/src/lib/config/responsive.config.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { InjectionToken } from '@angular/core';\r\n\r\nexport interface ResponsiveConfig {\r\n  tabletMin: number;\r\n  pcMin: number;\r\n  wideScreenMin: number;\r\n}\r\n\r\nexport const RESPONSIVE_CONFIG \r\n  = new InjectionToken<ResponsiveConfig>('responsive.config');\r\n\r\nexport const RESPONSIVE_CONFIG_DEFAULT: ResponsiveConfig = {\r\n  tabletMin: 768,\r\n  pcMin: 992,\r\n  wideScreenMin: 1200\r\n}\r\n",
+            "sourceCode": "import { InjectionToken } from '@angular/core';\r\n\r\nexport interface ResponsiveConfig {\r\n  medium: number;\r\n  large: number;\r\n  xLarge: number;\r\n}\r\n\r\nexport const RESPONSIVE_CONFIG \r\n  = new InjectionToken<ResponsiveConfig>('responsive.config');\r\n\r\nexport const RESPONSIVE_CONFIG_DEFAULT: ResponsiveConfig = {\r\n  medium: 768,\r\n  large: 992,\r\n  xLarge: 1280\r\n}\r\n",
             "properties": [
                 {
-                    "name": "pcMin",
+                    "name": "large",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -70,7 +70,7 @@
                     "line": 5
                 },
                 {
-                    "name": "tabletMin",
+                    "name": "medium",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -79,7 +79,7 @@
                     "line": 4
                 },
                 {
-                    "name": "wideScreenMin",
+                    "name": "xLarge",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -96,17 +96,182 @@
     "injectables": [
         {
             "name": "ScreenService",
-            "id": "injectable-ScreenService-883597a2b3c14d6d8edf9c72b7b730eeedc59f75416396df6d8a68b2904fa3c6b136e870e1f1c8d8da5da8db3e7f59e13e22fd8bae67a77b45c6fb6a8db2cf98",
+            "id": "injectable-ScreenService-c74416fd060e345648b36ed215f053d44da1ffafd111784f744cd6f87bf8f067817ec60246a83dca54996ed94f8cb83bc514b8a371366743bcbe0ed20dd160d0",
             "file": "projects/jobx-ui/src/lib/services/screen.service.ts",
             "properties": [
                 {
-                    "name": "pcSmallMin",
+                    "name": "large",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "medium",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "screenWidth",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
                     "optional": false,
                     "description": "",
                     "line": 31,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "xLarge",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methods": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "<p>Service that tracks viewport width for responsive components. Designed\noriginally as an abstract component, but that pattern is broken in Storybook.</p>\n",
+            "rawdescription": "\n\nService that tracks viewport width for responsive components. Designed\noriginally as an abstract component, but that pattern is broken in Storybook.\n",
+            "sourceCode": "import { Inject, Injectable } from '@angular/core';\nimport { \n  ResponsiveConfig, RESPONSIVE_CONFIG \n} from '../config/responsive.config';\n\n/**\n * Service that tracks viewport width for responsive components. Designed\n * originally as an abstract component, but that pattern is broken in Storybook.\n */\n@Injectable({ providedIn: 'root' })\nexport class ScreenService {\n  public get isSmall() {\n    return this.screenWidth < this.medium;\n  }\n  \n  public get isMedium() {\n    return this.screenWidth >= this.medium && this.screenWidth < this.large;\n  }\n\n  public get isLarge() {\n    return this.screenWidth >= this.large && this.screenWidth < this.xLarge;\n  }\n\n  public get isXLarge() {\n    return this.screenWidth >= this.xLarge;\n  };\n  \n  private medium: number;\n  private large: number;\n  private xLarge: number;\n  private screenWidth: number;\n  \n  constructor(\n    @Inject(RESPONSIVE_CONFIG) config: ResponsiveConfig\n  ) {\n    this.screenWidth = window.innerWidth;\n    this.medium = config.medium;\n    this.large = config.large;\n    this.xLarge = config.xLarge;\n    window.onresize = () => { this.screenWidth = window.innerWidth };\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "config",
+                        "type": "ResponsiveConfig",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 31,
+                "jsdoctags": [
+                    {
+                        "name": "config",
+                        "type": "ResponsiveConfig",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "isSmall": {
+                    "name": "isSmall",
+                    "getSignature": {
+                        "name": "isSmall",
+                        "type": "",
+                        "returnType": "",
+                        "line": 12
+                    }
+                },
+                "isMedium": {
+                    "name": "isMedium",
+                    "getSignature": {
+                        "name": "isMedium",
+                        "type": "",
+                        "returnType": "",
+                        "line": 16
+                    }
+                },
+                "isLarge": {
+                    "name": "isLarge",
+                    "getSignature": {
+                        "name": "isLarge",
+                        "type": "",
+                        "returnType": "",
+                        "line": 20
+                    }
+                },
+                "isXLarge": {
+                    "name": "isXLarge",
+                    "getSignature": {
+                        "name": "isXLarge",
+                        "type": "",
+                        "returnType": "",
+                        "line": 24
+                    }
+                }
+            },
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [
+        {
+            "name": "ResponsiveComponent",
+            "id": "directive-ResponsiveComponent-81418b0e1488e3a075099894672dc9b85433eb242ec68de6692e3171d14b28bc641366b37f3b4ea5d68a749b7c2c1c164f6b48ab2d7b11e9504dfdad34e55d1f",
+            "file": "projects/jobx-ui/src/lib/components/responsive/responsive.component.ts",
+            "type": "directive",
+            "description": "<p>Abstract class that can be extended by all responsive components. This\npattern is broken in Storybook, so this class had to be refactored into\nan injectable dependency (ScreenService).</p>\n",
+            "rawdescription": "\n\nAbstract class that can be extended by all responsive components. This\npattern is broken in Storybook, so this class had to be refactored into\nan injectable dependency (ScreenService).\n",
+            "sourceCode": "import { Directive, HostListener, Inject } from '@angular/core';\nimport { \n  ResponsiveConfig,\n  RESPONSIVE_CONFIG\n} from '../../config/responsive.config';\n\n/**\n * Abstract class that can be extended by all responsive components. This \n * pattern is broken in Storybook, so this class had to be refactored into \n * an injectable dependency (ScreenService). \n */\n@Directive()\nexport abstract class ResponsiveComponent {\n  public get isSmall() {\n    return this.screenWidth < this.medium;\n  }\n  \n  public get isMedium() {\n    return this.screenWidth >= this.medium && this.screenWidth < this.large;\n  }\n\n  public get isLarge() {\n    return this.screenWidth >= this.large && this.screenWidth < this.xLarge;\n  }\n\n  public get isXLarge() {\n    return this.screenWidth >= this.xLarge;\n  };\n  \n  private medium: number;\n  private large: number;\n  private xLarge: number;\n  private screenWidth: number;\n  \n  constructor(\n    @Inject(RESPONSIVE_CONFIG) config: ResponsiveConfig\n  ) {\n    this.screenWidth = window.innerWidth;\n    this.medium = config.medium;\n    this.large = config.large;\n    this.xLarge = config.xLarge;\n  }\n\n  @HostListener('window:resize', ['$event'])\n  public onResize() {\n    this.screenWidth = window.innerWidth;\n  }\n}\n",
+            "providers": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "window:resize",
+                    "args": [],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 45
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "large",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "medium",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
                     "modifierKind": [
                         121
                     ]
@@ -124,19 +289,7 @@
                     ]
                 },
                 {
-                    "name": "tabletMin",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 30,
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "wideScreenMin",
+                    "name": "xLarge",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "number",
@@ -148,12 +301,27 @@
                     ]
                 }
             ],
-            "methods": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "description": "<p>Service that tracks viewport width for responsive components. Designed\noriginally as an abstract component, but that pattern is broken in Storybook.</p>\n",
-            "rawdescription": "\n\nService that tracks viewport width for responsive components. Designed\noriginally as an abstract component, but that pattern is broken in Storybook.\n",
-            "sourceCode": "import { Inject, Injectable } from '@angular/core';\nimport { \n  ResponsiveConfig, RESPONSIVE_CONFIG \n} from '../config/responsive.config';\n\n/**\n * Service that tracks viewport width for responsive components. Designed\n * originally as an abstract component, but that pattern is broken in Storybook.\n */\n@Injectable({ providedIn: 'root' })\nexport class ScreenService {\n  public get isMobile() {\n    return this.screenWidth < this.tabletMin;\n  }\n  \n  public get isTablet() {\n    return this.screenWidth >= this.tabletMin\n      && this.screenWidth < this.pcSmallMin;\n  }\n\n  public get isPcSmall() {\n    return this.screenWidth >= this.pcSmallMin\n      && this.screenWidth < this.wideScreenMin;\n  }\n\n  public get isWideScreen() {\n    return this.screenWidth >= this.wideScreenMin;\n  };\n  \n  private tabletMin: number;\n  private pcSmallMin: number;\n  private wideScreenMin: number;\n  private screenWidth: number;\n  \n  constructor(\n    @Inject(RESPONSIVE_CONFIG) config: ResponsiveConfig\n  ) {\n    this.screenWidth = window.innerWidth;\n    this.tabletMin = config.tabletMin;\n    this.pcSmallMin = config.pcMin;\n    this.wideScreenMin = config.wideScreenMin;\n    window.onresize = () => { this.screenWidth = window.innerWidth };\n  }\n}\n",
+            "methodsClass": [
+                {
+                    "name": "onResize",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'window:resize', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -181,208 +349,40 @@
                 ]
             },
             "accessors": {
-                "isMobile": {
-                    "name": "isMobile",
+                "isSmall": {
+                    "name": "isSmall",
                     "getSignature": {
-                        "name": "isMobile",
-                        "type": "",
-                        "returnType": "",
-                        "line": 12
-                    }
-                },
-                "isTablet": {
-                    "name": "isTablet",
-                    "getSignature": {
-                        "name": "isTablet",
-                        "type": "",
-                        "returnType": "",
-                        "line": 16
-                    }
-                },
-                "isPcSmall": {
-                    "name": "isPcSmall",
-                    "getSignature": {
-                        "name": "isPcSmall",
-                        "type": "",
-                        "returnType": "",
-                        "line": 21
-                    }
-                },
-                "isWideScreen": {
-                    "name": "isWideScreen",
-                    "getSignature": {
-                        "name": "isWideScreen",
-                        "type": "",
-                        "returnType": "",
-                        "line": 26
-                    }
-                }
-            },
-            "type": "injectable"
-        }
-    ],
-    "guards": [],
-    "interceptors": [],
-    "classes": [],
-    "directives": [
-        {
-            "name": "ResponsiveComponent",
-            "id": "directive-ResponsiveComponent-87c56d935359a3441bdd315565d50d413bc3e5dbfb80de89ffc3abf3b15a3ede4afd6e8f3d21fbc88380481e23e75fbc1af47eccdd22cacd06646b74743d6588",
-            "file": "projects/jobx-ui/src/lib/components/responsive/responsive.component.ts",
-            "type": "directive",
-            "description": "<p>Abstract class that can be extended by all responsive components. This\npattern is broken in Storybook, so this class had to be refactored into\nan injectable dependency (ScreenService).</p>\n",
-            "rawdescription": "\n\nAbstract class that can be extended by all responsive components. This\npattern is broken in Storybook, so this class had to be refactored into\nan injectable dependency (ScreenService).\n",
-            "sourceCode": "import { Directive, HostListener, Inject } from '@angular/core';\nimport { \n  ResponsiveConfig,\n  RESPONSIVE_CONFIG\n} from '../../config/responsive.config';\n\n/**\n * Abstract class that can be extended by all responsive components. This \n * pattern is broken in Storybook, so this class had to be refactored into \n * an injectable dependency (ScreenService). \n */\n@Directive()\nexport abstract class ResponsiveComponent {\n  public get isMobile() {\n    return this.screenWidth < this.tabletMin;\n  }\n  \n  public get isTablet() {\n    return this.screenWidth >= this.tabletMin\n      && this.screenWidth < this.pcSmallMin;\n  }\n\n  public get isPcSmall() {\n    return this.screenWidth >= this.pcSmallMin\n      && this.screenWidth < this.wideScreenMin;\n  }\n\n  public get isWideScreen() {\n    return this.screenWidth >= this.wideScreenMin;\n  };\n  \n  private tabletMin: number;\n  private pcSmallMin: number;\n  private wideScreenMin: number;\n  private screenWidth: number;\n  \n  constructor(\n    @Inject(RESPONSIVE_CONFIG) config: ResponsiveConfig\n  ) {\n    this.screenWidth = window.innerWidth;\n    this.tabletMin = config.tabletMin;\n    this.pcSmallMin = config.pcMin;\n    this.wideScreenMin = config.wideScreenMin;\n  }\n\n  @HostListener('window:resize', ['$event'])\n  public onResize() {\n    this.screenWidth = window.innerWidth;\n  }\n}\n",
-            "providers": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [
-                {
-                    "name": "window:resize",
-                    "args": [],
-                    "argsDecorator": [
-                        "$event"
-                    ],
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 47
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "pcSmallMin",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 33,
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "screenWidth",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 35,
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "tabletMin",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 32,
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "wideScreenMin",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 34,
-                    "modifierKind": [
-                        121
-                    ]
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "onResize",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 47,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "decorators": [
-                        {
-                            "name": "HostListener",
-                            "stringifiedArguments": "'window:resize', ['$event']"
-                        }
-                    ],
-                    "modifierKind": [
-                        123
-                    ]
-                }
-            ],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "config",
-                        "type": "ResponsiveConfig",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 35,
-                "jsdoctags": [
-                    {
-                        "name": "config",
-                        "type": "ResponsiveConfig",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "accessors": {
-                "isMobile": {
-                    "name": "isMobile",
-                    "getSignature": {
-                        "name": "isMobile",
+                        "name": "isSmall",
                         "type": "",
                         "returnType": "",
                         "line": 14
                     }
                 },
-                "isTablet": {
-                    "name": "isTablet",
+                "isMedium": {
+                    "name": "isMedium",
                     "getSignature": {
-                        "name": "isTablet",
+                        "name": "isMedium",
                         "type": "",
                         "returnType": "",
                         "line": 18
                     }
                 },
-                "isPcSmall": {
-                    "name": "isPcSmall",
+                "isLarge": {
+                    "name": "isLarge",
                     "getSignature": {
-                        "name": "isPcSmall",
+                        "name": "isLarge",
                         "type": "",
                         "returnType": "",
-                        "line": 23
+                        "line": 22
                     }
                 },
-                "isWideScreen": {
-                    "name": "isWideScreen",
+                "isXLarge": {
+                    "name": "isXLarge",
                     "getSignature": {
-                        "name": "isWideScreen",
+                        "name": "isXLarge",
                         "type": "",
                         "returnType": "",
-                        "line": 28
+                        "line": 26
                     }
                 }
             }
@@ -541,7 +541,7 @@
         },
         {
             "name": "GiftsGroupListComponent",
-            "id": "component-GiftsGroupListComponent-1a85e4155daa8de4dad92089b6b9b4a964739dd300469287d58baf4c08310239f7fb825e5596f6ef821f5d5973f115e8ad2792883f90bcf5cf67b06780566d96",
+            "id": "component-GiftsGroupListComponent-f7bd2e7a45af5c8b64f556a8a5bf7e02dba50f4f503bd96c2e48cd2456145a6fa9d33bdd8e05847500abefe9f12dedf13b507528be1d7d6aa740069b5ac8c9ae",
             "file": "projects/jobx-ui/src/lib/components/gifts-group-list/gifts-group-list.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -609,7 +609,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { GiftsGroup } from '../../models/gifts-group';\nimport { ScreenService } from '../../services/screen.service';\n\n@Component({\n  selector: 'jxui-gifts-group-list[groups]',\n  templateUrl: './gifts-group-list.component.html',\n  styleUrls: ['./gifts-group-list.component.scss']\n})\nexport class GiftsGroupListComponent {\n  @Input() groups!: GiftsGroup[];\n\n  public get isMobile() { return this.screen.isMobile; }\n  public get isTablet() { return this.screen.isTablet; }\n\n  constructor(private screen: ScreenService) {}\n  \n  public select(group: GiftsGroup): void {\n    alert('Selected group: ' + group.name);\n  }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { GiftsGroup } from '../../models/gifts-group';\nimport { ScreenService } from '../../services/screen.service';\n\n@Component({\n  selector: 'jxui-gifts-group-list[groups]',\n  templateUrl: './gifts-group-list.component.html',\n  styleUrls: ['./gifts-group-list.component.scss']\n})\nexport class GiftsGroupListComponent {\n  @Input() groups!: GiftsGroup[];\n\n  public get isSmall() { return this.screen.isSmall; }\n  public get isMedium() { return this.screen.isMedium; }\n\n  constructor(private screen: ScreenService) {}\n  \n  public select(group: GiftsGroup): void {\n    alert('Selected group: ' + group.name);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -645,26 +645,26 @@
                 ]
             },
             "accessors": {
-                "isMobile": {
-                    "name": "isMobile",
+                "isSmall": {
+                    "name": "isSmall",
                     "getSignature": {
-                        "name": "isMobile",
+                        "name": "isSmall",
                         "type": "",
                         "returnType": "",
                         "line": 13
                     }
                 },
-                "isTablet": {
-                    "name": "isTablet",
+                "isMedium": {
+                    "name": "isMedium",
                     "getSignature": {
-                        "name": "isTablet",
+                        "name": "isMedium",
                         "type": "",
                         "returnType": "",
                         "line": 14
                     }
                 }
             },
-            "templateData": "<h2 class=\"uk-text-center@s uk-heading-line\"><span>Grupos de regalos</span></h2>\n\n<div *ngIf=\"isMobile || isTablet; then list else horizontalScroll\"></div>\n\n<ng-template #horizontalScroll>\n  <jxui-slider>\n    <li *ngFor=\"let group of groups\">\n      <jxui-gifts-group-card (selected)=\"select(group)\"\n        [id]=\"group.id\"\n        [name]=\"group.name\"\n        [description]=\"group.description\"\n        [tags]=\"group.tags\">\n      </jxui-gifts-group-card>\n    </li>\n  </jxui-slider>\n</ng-template>\n\n<ng-template #list>\n  <ul \n    class=\"uk-list uk-list-striped uk-overflow-auto\"\n    [ngClass]=\"{\n      'uk-list-large uk-height-max-large scrollbar-wide': isTablet,\n      'uk-height-max-medium': isMobile\n    }\"\n  >\n    <li *ngFor=\"let group of groups\" class=\"uk-text-center\">\n      <button class=\"uk-button uk-button-text\" (click)=\"select(group)\">\n        {{ group.name }}\n      </button>\n    </li>\n  </ul>\n</ng-template>\n"
+            "templateData": "<h2 class=\"uk-text-center@s uk-heading-line\"><span>Grupos de regalos</span></h2>\n\n<div *ngIf=\"isSmall || isMedium; then list else horizontalScroll\"></div>\n\n<ng-template #horizontalScroll>\n  <jxui-slider>\n    <li *ngFor=\"let group of groups\">\n      <jxui-gifts-group-card (selected)=\"select(group)\"\n        [id]=\"group.id\"\n        [name]=\"group.name\"\n        [description]=\"group.description\"\n        [tags]=\"group.tags\">\n      </jxui-gifts-group-card>\n    </li>\n  </jxui-slider>\n</ng-template>\n\n<ng-template #list>\n  <ul \n    class=\"uk-list uk-list-striped uk-overflow-auto\"\n    [ngClass]=\"{\n      'uk-list-large uk-height-max-large scrollbar-wide': isMedium,\n      'uk-height-max-medium': isSmall\n    }\"\n  >\n    <li *ngFor=\"let group of groups\" class=\"uk-text-center\">\n      <button class=\"uk-button uk-button-text\" (click)=\"select(group)\">\n        {{ group.name }}\n      </button>\n    </li>\n  </ul>\n</ng-template>\n"
         },
         {
             "name": "SliderComponent",
@@ -817,7 +817,7 @@
                 "name": "context",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/demo-app/src/test.ts",
+                "file": "projects/jobx-ui/src/test.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -827,7 +827,7 @@
                 "name": "context",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/jobx-ui/src/test.ts",
+                "file": "projects/demo-app/src/test.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -864,20 +864,10 @@
                 "defaultValue": "[\r\n  {\r\n    id: 1,\r\n    name: 'Compis de piso',\r\n    description: 'Lista de regalos para los compis de piso',\r\n    tags: ['Deportes de riesgo', 'Libros']\r\n  }, {\r\n    id: 2,\r\n    name: 'Familia',\r\n    description: `Lista de regalos para la famila. Haremos esta descripción \r\n      algo más larga para comprobar que los elementos del scroll horizontal \r\n      mantienen el mismo tamaño aunque difieran en contenido.`,\r\n    tags: ['Familia', 'Deportes']\r\n  }, {\r\n    id: 3,\r\n    name: 'Colegas del trabajo',\r\n    description: 'Lista de regalos para los colegas del trabajo',\r\n    tags: ['Administración', 'Mindfulness']\r\n  }, {\r\n    id: 4,\r\n    name: 'Amigos',\r\n    description: 'Lista de regalos para los amigos',\r\n    tags: ['Deportes', 'Comida']\r\n  }, {\r\n    id: 5,\r\n    name: 'Estudiantes',\r\n    description: 'Lista de regalos para estudiantes',\r\n    tags: ['Libros', 'Revistas']\r\n  }, {\r\n    id: 6,\r\n    name: 'Profesores',\r\n    description: 'Lista de regalos para profesores',\r\n    tags: ['Libros', 'Comida']\r\n  }, {\r\n    id: 7,\r\n    name: 'Músicos',\r\n    description: 'Lista de regalos para músicos',\r\n    tags: ['Instrumentos', 'Entradas conciertos']\r\n  }, {\r\n    id: 8,\r\n    name: 'Niños',\r\n    description: 'Lista de regalos para niños',\r\n    tags: ['Juguetes', 'Revistas']\r\n  }, {\r\n    id: 9,\r\n    name: 'Abuelos',\r\n    description: 'Lista de regalos para abuelos',\r\n    tags: ['Comida', 'Ropa']\r\n  }\r\n]"
             },
             {
-                "name": "MobileView",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "stories/gifts-group-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "require",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/demo-app/src/test.ts",
+                "file": "projects/jobx-ui/src/test.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "literal type"
@@ -886,7 +876,7 @@
                 "name": "require",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/jobx-ui/src/test.ts",
+                "file": "projects/demo-app/src/test.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "literal type"
@@ -909,44 +899,13 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ResponsiveConfig",
-                "defaultValue": "{\r\n  tabletMin: 768,\r\n  pcMin: 992,\r\n  wideScreenMin: 1200\r\n}"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "stories/gifts-group-list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<GiftsGroupListComponent>",
-                "defaultValue": "(args: GiftsGroupListComponent) => ({\r\n  props: args,\r\n})"
+                "defaultValue": "{\r\n  medium: 768,\r\n  large: 992,\r\n  xLarge: 1280\r\n}"
             }
         ],
         "functions": [],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "projects/demo-app/src/test.ts": [
-                {
-                    "name": "context",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/demo-app/src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-                },
-                {
-                    "name": "require",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "projects/demo-app/src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type"
-                }
-            ],
             "projects/jobx-ui/src/test.ts": [
                 {
                     "name": "context",
@@ -963,6 +922,27 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "projects/jobx-ui/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "projects/demo-app/src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/demo-app/src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/demo-app/src/test.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "literal type"
@@ -1004,28 +984,6 @@
                     "defaultValue": "[\r\n  {\r\n    id: 1,\r\n    name: 'Compis de piso',\r\n    description: 'Lista de regalos para los compis de piso',\r\n    tags: ['Deportes de riesgo', 'Libros']\r\n  }, {\r\n    id: 2,\r\n    name: 'Familia',\r\n    description: `Lista de regalos para la famila. Haremos esta descripción \r\n      algo más larga para comprobar que los elementos del scroll horizontal \r\n      mantienen el mismo tamaño aunque difieran en contenido.`,\r\n    tags: ['Familia', 'Deportes']\r\n  }, {\r\n    id: 3,\r\n    name: 'Colegas del trabajo',\r\n    description: 'Lista de regalos para los colegas del trabajo',\r\n    tags: ['Administración', 'Mindfulness']\r\n  }, {\r\n    id: 4,\r\n    name: 'Amigos',\r\n    description: 'Lista de regalos para los amigos',\r\n    tags: ['Deportes', 'Comida']\r\n  }, {\r\n    id: 5,\r\n    name: 'Estudiantes',\r\n    description: 'Lista de regalos para estudiantes',\r\n    tags: ['Libros', 'Revistas']\r\n  }, {\r\n    id: 6,\r\n    name: 'Profesores',\r\n    description: 'Lista de regalos para profesores',\r\n    tags: ['Libros', 'Comida']\r\n  }, {\r\n    id: 7,\r\n    name: 'Músicos',\r\n    description: 'Lista de regalos para músicos',\r\n    tags: ['Instrumentos', 'Entradas conciertos']\r\n  }, {\r\n    id: 8,\r\n    name: 'Niños',\r\n    description: 'Lista de regalos para niños',\r\n    tags: ['Juguetes', 'Revistas']\r\n  }, {\r\n    id: 9,\r\n    name: 'Abuelos',\r\n    description: 'Lista de regalos para abuelos',\r\n    tags: ['Comida', 'Ropa']\r\n  }\r\n]"
                 }
             ],
-            "stories/gifts-group-list.stories.ts": [
-                {
-                    "name": "MobileView",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "stories/gifts-group-list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "stories/gifts-group-list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<GiftsGroupListComponent>",
-                    "defaultValue": "(args: GiftsGroupListComponent) => ({\r\n  props: args,\r\n})"
-                }
-            ],
             "projects/jobx-ui/src/lib/config/responsive.config.ts": [
                 {
                     "name": "RESPONSIVE_CONFIG",
@@ -1045,7 +1003,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ResponsiveConfig",
-                    "defaultValue": "{\r\n  tabletMin: 768,\r\n  pcMin: 992,\r\n  wideScreenMin: 1200\r\n}"
+                    "defaultValue": "{\r\n  medium: 768,\r\n  large: 992,\r\n  xLarge: 1280\r\n}"
                 }
             ]
         },
@@ -1216,26 +1174,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "groups",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "stories/gifts-group-list.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "MobileView",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "stories/gifts-group-list.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
