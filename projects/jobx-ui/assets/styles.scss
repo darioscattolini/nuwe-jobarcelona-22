@@ -2,10 +2,44 @@
 @import "node_modules/uikit/src/scss/mixins-theme.scss";
 @import "node_modules/uikit/src/scss/uikit-theme.scss";
 
+/* SLIDER TRANSFORM EFFECT */
 .uk-slider .uk-active {
   transform: scale(1.1);
 }
 
 .uk-slider-items li {
   transition: transform 0.8s ease-in;
+}
+
+/* SCROLLBAR CUSTOMIZATION */
+html {
+  --scrollbarBG: #e5e5e5;
+  --thumbBG: #bbbbbb;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 11px;
+}
+
+.custom-scrollbar.scrollbar-wide::-webkit-scrollbar {
+  width: 16px;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.custom-scrollbar.scrollbar-wide {
+  scrollbar-width: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }

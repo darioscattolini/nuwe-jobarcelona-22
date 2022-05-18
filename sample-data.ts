@@ -11,7 +11,12 @@ export const groups: GiftsGroup[] = [
     name: 'Familia',
     description: `Lista de regalos para la famila. Haremos esta descripción 
       algo más larga para comprobar que los elementos del scroll horizontal 
-      mantienen el mismo tamaño aunque difieran en contenido.`,
+      mantienen el mismo tamaño aunque difieran en contenido. También 
+      comprobaremos el comportamiento del componente cuando los elementos crecen
+      más allá de la altura máxima establecida. Lorem ipsum dolor sit amet,
+      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+      ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
     tags: ['Familia', 'Deportes']
   }, {
     id: 3,

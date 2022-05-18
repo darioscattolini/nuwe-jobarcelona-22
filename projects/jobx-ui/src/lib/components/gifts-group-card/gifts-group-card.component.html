@@ -1,7 +1,10 @@
-<div  class="uk-card uk-card-default uk-card-hover 
+<div class="uk-card uk-card-default uk-card-hover 
     gifts-group-card uk-flex uk-flex-column uk-flex-between">
-  <div class="uk-card-body">
-    <h4 class="uk-card-title">{{ name }}</h4>
+    <div class="uk-card-header">
+      <h4 class="uk-card-title">{{ name }}</h4>
+    </div>
+
+    <div class="uk-card-body flex-shrink custom-scrollbar scrollbar-wide">
     <p>{{ description }}</p>
     <div>
       <span *ngFor="let tag of tags" class="uk-badge uk-margin-small-right">
