@@ -10,8 +10,8 @@ import { ScreenService } from '../../services/screen.service';
 export class GiftsGroupListComponent {
   @Input() groups!: GiftsGroup[];
 
-  public get isMobile() { return this.screen.isMobile; }
-  public get isTablet() { return this.screen.isTablet; }
+  public get isSmall() { return this.screen.isSmall; }
+  public get isMedium() { return this.screen.isMedium; }
 
   constructor(private screen: ScreenService) {}
   

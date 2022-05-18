@@ -1,16 +1,16 @@
 import { InjectionToken } from '@angular/core';
 
 export interface ResponsiveConfig {
-  tabletMin: number;
-  pcMin: number;
-  wideScreenMin: number;
+  medium: number;
+  large: number;
+  xLarge: number;
 }
 
 export const RESPONSIVE_CONFIG 
   = new InjectionToken<ResponsiveConfig>('responsive.config');
 
 export const RESPONSIVE_CONFIG_DEFAULT: ResponsiveConfig = {
-  tabletMin: 768,
-  pcMin: 992,
-  wideScreenMin: 1200
+  medium: 768,
+  large: 992,
+  xLarge: 1280
 }

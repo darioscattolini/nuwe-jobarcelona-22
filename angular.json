@@ -154,8 +154,13 @@
         "build": {
           "options": {
             "tsConfig": "tsconfig.json",
-            "styles": [],
-            "scripts": []
+            "styles": [
+              "dist/jobx-ui/assets/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/uikit/dist/js/uikit-core.min.js",
+              "node_modules/uikit/dist/js/components/slider.min.js"
+            ]
           }
         }
       }

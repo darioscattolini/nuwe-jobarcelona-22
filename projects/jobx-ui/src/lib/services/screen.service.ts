@@ -9,36 +9,34 @@ import {
  */
 @Injectable({ providedIn: 'root' })
 export class ScreenService {
-  public get isMobile() {
-    return this.screenWidth < this.tabletMin;
+  public get isSmall() {
+    return this.screenWidth < this.medium;
   }
   
-  public get isTablet() {
-    return this.screenWidth >= this.tabletMin
-      && this.screenWidth < this.pcSmallMin;
+  public get isMedium() {
+    return this.screenWidth >= this.medium && this.screenWidth < this.large;
   }
 
-  public get isPcSmall() {
-    return this.screenWidth >= this.pcSmallMin
-      && this.screenWidth < this.wideScreenMin;
+  public get isLarge() {
+    return this.screenWidth >= this.large && this.screenWidth < this.xLarge;
   }
 
-  public get isWideScreen() {
-    return this.screenWidth >= this.wideScreenMin;
+  public get isXLarge() {
+    return this.screenWidth >= this.xLarge;
   };
   
-  private tabletMin: number;
-  private pcSmallMin: number;
-  private wideScreenMin: number;
+  private medium: number;
+  private large: number;
+  private xLarge: number;
   private screenWidth: number;
   
   constructor(
     @Inject(RESPONSIVE_CONFIG) config: ResponsiveConfig
   ) {
     this.screenWidth = window.innerWidth;
-    this.tabletMin = config.tabletMin;
-    this.pcSmallMin = config.pcMin;
-    this.wideScreenMin = config.wideScreenMin;
+    this.medium = config.medium;
+    this.large = config.large;
+    this.xLarge = config.xLarge;
     window.onresize = () => { this.screenWidth = window.innerWidth };
   }
 }
