@@ -4,14 +4,14 @@ import {
   RESPONSIVE_CONFIG,
   RESPONSIVE_CONFIG_DEFAULT
 } from './config/responsive.config';
-import { ScreenService } from './responsive/screen.service';
+import { ScreenService } from './services/screen.service';
 import { 
   GiftsGroupCardComponent
-} from './gifts-group-card/gifts-group-card.component';
+} from './components/gifts-group-card/gifts-group-card.component';
 import { 
   GiftsGroupListComponent
-} from './gifts-group-list/gifts-group-list.component';
-import { SliderComponent } from './slider/slider.component';
+} from './components/gifts-group-list/gifts-group-list.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [

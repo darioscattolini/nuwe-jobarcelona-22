@@ -2,7 +2,7 @@ import { Directive, HostListener, Inject } from '@angular/core';
 import { 
   ResponsiveConfig,
   RESPONSIVE_CONFIG
-} from '../config/responsive.config';
+} from '../../config/responsive.config';
 
 /**
  * Abstract class that can be extended by all responsive components. This 

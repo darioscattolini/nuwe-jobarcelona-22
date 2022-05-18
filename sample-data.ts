@@ -1,4 +1,6 @@
-export const groups = [
+import { GiftsGroup } from 'jobx-ui';
+
+export const groups: GiftsGroup[] = [
   {
     id: 1,
     name: 'Compis de piso',

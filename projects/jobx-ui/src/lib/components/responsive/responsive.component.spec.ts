@@ -3,7 +3,7 @@ import { ResponsiveComponent } from './responsive.component';
 import {
   RESPONSIVE_CONFIG,
   RESPONSIVE_CONFIG_DEFAULT
-} from '../config/responsive.config';
+} from '../../config/responsive.config';
 
 class ResponsiveComponentConcrete extends ResponsiveComponent {}
 
